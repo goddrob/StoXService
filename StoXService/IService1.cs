@@ -30,10 +30,30 @@ namespace StoXService
         [OperationContract]
         [WebInvoke(Method = "GET", UriTemplate = "/Search/{phrase}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         List<Company> Search(string phrase);
+        [OperationContract]
+        [WebInvoke(Method = "GET", UriTemplate = "/GetDaily/{symbol}/{start}/{end}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        List<HistData> GetDaily(string symbol, string start, string end);
     }   
 
     // Service Classes
-
+    [DataContract]
+    public class HistData
+    {
+        [DataMember]
+        public string Symbol {get;set;}
+        [DataMember]
+        public DateTime Date {get;set;}
+        [DataMember]
+        public int Volume {get;set;}
+        [DataMember]
+        public double Open {get;set;}
+        [DataMember]
+        public double Close {get;set;}
+        [DataMember]
+        public double High {get;set;}
+        [DataMember]
+        public double Low {get;set;}
+    }
     [DataContract]
     public class Company
     {

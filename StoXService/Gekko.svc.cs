@@ -38,6 +38,34 @@ namespace StoXService
             con.Close();
             return Result;
         }
+        public List<HistData> GetDaily(string symbol, string start, string end)
+        {
+            SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["myConnString"].ToString());
+            con.Open();
+            SqlCommand sqlCmd = new SqlCommand("SELECT * FROM HistoricalStock WHERE Symbol=@Symbol AND Date BETWEEN @Start AND @End ORDER BY Date DESC", con);
+            sqlCmd.Parameters.AddWithValue("@Symbol", symbol);
+            sqlCmd.Parameters.AddWithValue("@Start", start);
+            sqlCmd.Parameters.AddWithValue("@End", end);
+            SqlDataReader sread = null;
+            sread = sqlCmd.ExecuteReader();
+            if (!sread.HasRows) return null;
+            List<HistData> ResultList = new List<HistData>();
+            while (sread.Read())
+            {
+                HistData Temp = new HistData();
+                Temp.Symbol = sread["Symbol"].ToString();
+                Temp.Date = Convert.ToDateTime(sread["Date"].ToString());
+                Temp.Open = Convert.ToDouble(sread["Open"].ToString());
+                Temp.Close = Convert.ToDouble(sread["Close"].ToString());
+                Temp.High = Convert.ToDouble(sread["MaxPrice"].ToString());
+                Temp.Low = Convert.ToDouble(sread["MinPrice"].ToString());
+                Temp.Volume = Convert.ToInt32(sread["Volume"].ToString());
+                ResultList.Add(Temp);
+
+            }
+            con.Close();
+            return ResultList;
+        }
         //Returns a list of companies matching the search phrase. Null if there is no result.
         public List<Company> Search(string phrase)
         {
