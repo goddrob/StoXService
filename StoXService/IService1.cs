@@ -102,19 +102,7 @@ namespace StoXService
         {
             get;
             set;
-        }
-        [DataMember]
-        public double YearMinPrice
-        {
-            get;
-            set;
-        }
-        [DataMember]
-        public double YearMaxPrice
-        {
-            get;
-            set;
-        }
+        }       
     }
     
 }

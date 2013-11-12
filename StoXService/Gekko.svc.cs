@@ -63,8 +63,6 @@ namespace StoXService
                 Result.Volume = Convert.ToInt32(sread["Volume"].ToString());
                 Result.DayMinPrice = Convert.ToDouble(sread["DayMinPrice"].ToString());
                 Result.DayMaxPrice = Convert.ToDouble(sread["DayMaxPrice"].ToString());
-                Result.YearMinPrice = Convert.ToDouble(sread["YearMinPrice"].ToString());
-                Result.YearMaxPrice = Convert.ToDouble(sread["YearMaxPrice"].ToString());
                 ResultList.Add(Result);
             }
             con.Close();
@@ -95,8 +93,6 @@ namespace StoXService
                 Result.Volume = Convert.ToInt32(sread["Volume"].ToString());
                 Result.DayMinPrice = Convert.ToDouble(sread["DayMinPrice"].ToString());
                 Result.DayMaxPrice = Convert.ToDouble(sread["DayMaxPrice"].ToString());
-                Result.YearMinPrice = Convert.ToDouble(sread["YearMinPrice"].ToString());
-                Result.YearMaxPrice = Convert.ToDouble(sread["YearMaxPrice"].ToString());
             }
             con.Close();
             return Result;
